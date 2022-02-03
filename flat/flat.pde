@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-static final boolean CLOSE_BOUNDARY = true;
+static final boolean CLOSED_BOUNDARY = true;
 static final boolean LOCALITY = true;
 
 static final int SIZE = 20;
@@ -15,7 +15,7 @@ class Node {
 
   float dist(Node other) {
     float d = pos.dist(other.pos);
-    if (CLOSE_BOUNDARY) {
+    if (CLOSED_BOUNDARY) {
       d = min(d, other.pos.dist(new PVector(pos.x + SIZE, pos.y + SIZE)));
       d = min(d, other.pos.dist(new PVector(pos.x + SIZE, pos.y       )));
       d = min(d, other.pos.dist(new PVector(pos.x + SIZE, pos.y - SIZE)));
