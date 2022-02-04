@@ -12,6 +12,7 @@ static final float TORUS_SMALL_R = .3;
 static final float SCALE = 1000;
 static final float CAM_RADIUS = 3;
 static final float CIRCLE_SIZE = .14;
+static final boolean RING = false;
 
 Sphere sphere;
 Torus torus;
@@ -185,6 +186,12 @@ class Torus extends Sphere {
       rad += PI;
     }
     node.center_cache = new PVector(cos(rad), 0, sin(rad)).mult(TORUS_BIG_R);
+    if (RING) {
+      node.pos.x = node.center_cache.x * 1.5;
+      node.pos.z = node.center_cache.z * 1.5;
+      node.pos.y = constrain(node.pos.y, -.5, .5);;
+      return;
+    }
     node.pos = node.center_cache.copy().add(node.pos.sub(
       node.center_cache
     ).normalize().mult(TORUS_SMALL_R));
@@ -213,7 +220,9 @@ class Torus extends Sphere {
     if (node.pos.z < 0) {
       rotateY(PI);
     }
-    rotateX(-node.rad_cache);
+    if (! RING) {
+      rotateX(-node.rad_cache);
+    }
   }
 }
 
@@ -258,13 +267,13 @@ void draw() {
   }
   // strokeWeight(.0005);
   noStroke();
-  // pushMatrix();
-  //   translate(1.3, 0, 0);
-  //   rotateZ(millis() * .0002);
-  //   sphere.draw();
-  // popMatrix();
   pushMatrix();
-    // translate(-1.1, 0, 0);
+    translate(1.3, 0, 0);
+    rotateZ(millis() * .0002);
+    sphere.draw();
+  popMatrix();
+  pushMatrix();
+    translate(-1.1, 0, 0);
     rotateZ(millis() * .0002);
     torus.draw();
   popMatrix();
