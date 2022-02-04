@@ -267,14 +267,14 @@ void draw() {
   }
   // strokeWeight(.0005);
   noStroke();
+  // pushMatrix();
+  //   translate(1.3, 0, 0);
+  //   rotateZ(millis() * .0002);
+  //   sphere.draw();
+  // popMatrix();
   pushMatrix();
-    translate(1.3, 0, 0);
-    rotateZ(millis() * .0002);
-    sphere.draw();
-  popMatrix();
-  pushMatrix();
-    translate(-1.1, 0, 0);
-    rotateZ(millis() * .0002);
+    // translate(-1.1, 0, 0);
+    rotateZ((millis() - 6000) * .0002);
     torus.draw();
   popMatrix();
 }
